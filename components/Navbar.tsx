@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
         {/* Desktop Nav */}
         <ul className="hidden lg:flex space-x-25 text-sm font-medium text-black">
           <li>
-            <Link href="/products" className="hover:text-blue-500">
+            <Link href="/" className="hover:text-blue-500">
               Automobiles
             </Link>
           </li>
@@ -42,17 +42,17 @@ const Navbar: React.FC = () => {
             </Link>
           </li> */}
           <li>
-            <Link href="/services" className="hover:text-blue-500">
+            <Link href="#services" className="hover:text-blue-500">
               Services
             </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:text-blue-500">
+            <Link href="#about" className="hover:text-blue-500">
               About Us
             </Link>
           </li>
           <li>
-            <Link href="/sustainability" className="hover:text-blue-500">
+            <Link href="#" className="hover:text-blue-500">
               Sign-In
             </Link>
           </li>
@@ -86,20 +86,17 @@ const Navbar: React.FC = () => {
               </Link>
             </li> */}
             <li>
-              <Link href="/services" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="#services" onClick={() => setMobileMenuOpen(false)}>
                 Services
               </Link>
             </li>
             <li>
-              <Link href="/about" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="#about" onClick={() => setMobileMenuOpen(false)}>
                 About Us
               </Link>
             </li>
             <li>
-              <Link
-                href="/sustainability"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="#" onClick={() => setMobileMenuOpen(false)}>
                 Sign-In
               </Link>
             </li>

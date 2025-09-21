@@ -1,19 +1,32 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import ImageCarousel from "../components/ImageCarousel";
-import LogoSection from "../components/LogoSection";
+import ImportedHome from "../components/Home";
+import Service from "../components/Service";
+import ServiceChecklist from "@/pages/service-checklist";
+import About from "@/pages/about";
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10">
-        <div className="w-full md:w-1/2">
-          <LogoSection />
-        </div>
-        <div className="w-full md:w-1/2">
-          <ImageCarousel />
-        </div>
+      <main className="w-full">
+        {/* <div className="w-full"> */}
+
+        <section id="home-page" className="min-h-screen">
+          <ImportedHome />{" "}
+        </section>
+        <section id="services" className="min-h-screen">
+          <Service />
+          <ServiceChecklist />
+        </section>
+
+        <section id="about" className="min-h-screen">
+          <About />
+        </section>
+
+        {/* <Service />
+        <About /> */}
+        {/* </div> */}
       </main>
     </div>
   );
