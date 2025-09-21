@@ -40,7 +40,15 @@ export const metadata: Metadata = {
     description: "Bike service and spare parts",
     images: ["/LandingPage/newLogo.png"],
   },
+  verification: {
+    google: "u2rxMqqfwuZSv8Y-AEIn5qFIuYG5aN5uuTcv_pxgAL4",
+  },
 };
+
+<meta
+  name="google-site-verification"
+  content="u2rxMqqfwuZSv8Y-AEIn5qFIuYG5aN5uuTcv_pxgAL4"
+/>;
 
 export default function RootLayout({
   children,
