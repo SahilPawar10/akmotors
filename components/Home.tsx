@@ -71,7 +71,7 @@ const ImportedHome: React.FC = () => {
                 {slogans[currentWord]}
               </motion.span>
             </AnimatePresence>{" "}
-            Your Bike .
+            Your Bike
           </h1>
 
           {/* Description */}
