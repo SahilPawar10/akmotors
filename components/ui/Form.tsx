@@ -56,11 +56,26 @@ export default function Form({ fields, onSubmit, loading, error }: FormProps) {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value, files, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "file" && files ? files[0] : value,
-    }));
+    const target = e.target; // assign first
+
+    if (target instanceof HTMLInputElement) {
+      const { name, type, value, files } = target; // safe now
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "file" && files?.length ? files[0] : value,
+      }));
+    } else if (
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement
+    ) {
+      const { name, value } = target;
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
