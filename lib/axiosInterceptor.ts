@@ -9,7 +9,8 @@ interface JwtPayload {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/v1", // local server
+  baseURL: "https://akmotors-server.onrender.com/v1", // deploy
+  // baseURL: "http://localhost:5000/v1", // local server
 });
 
 axiosInstance.interceptors.request.use(
