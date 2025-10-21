@@ -11,6 +11,9 @@ import { RootState, AppDispatch } from "@/providers/store";
 import { useStocks } from "@/hooks/useStocks";
 import { addStock, fetchStocks, selectStocks } from "@/slices/stockSlice";
 import { Upload, Download, Plus } from "lucide-react";
+import DownloadExcelButton from "@/components/ui/DownloadExcelButton";
+import { IMPORT_STOCK_EXCEL, IMPORT_STOCK_SAMPLE_FILE } from "@/lib/constant";
+import ImportButton from "@/components/ui/ImportButton";
 
 export default function Stocks() {
   const dispatch = useDispatch<AppDispatch>();
@@ -81,14 +84,19 @@ export default function Stocks() {
 
         {/* Action buttons */}
         <div className="flex flex-wrap items-center gap-2">
+          <DownloadExcelButton
+            url={`${IMPORT_STOCK_SAMPLE_FILE}`}
+            filename="stock-sample.xlsx"
+            label="Sample Excel"
+          />
           {/* Import button - themed with light purple border */}
-          <Button
-            icon={<Upload className="h-4 w-4" />}
-            onClick={handleImport}
-            className="bg-white text-purple-600 border border-purple-300 hover:bg-purple-50"
-          >
-            Import
-          </Button>
+          <ImportButton
+            endpoint={`${IMPORT_STOCK_EXCEL}`}
+            acceptedTypes=".xlsx"
+            onUploadSuccess={async () => {
+              refetchStocks();
+            }}
+          />
 
           {/* Export button - same theme */}
           <Button

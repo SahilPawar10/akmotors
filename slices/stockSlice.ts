@@ -17,7 +17,7 @@ const initialState: StocksState = {
   error: null,
 };
 
-// Fetch users
+// Fetch Stocks
 export const fetchStocks = createAsyncThunk("stocks/fetchStocks", async () => {
   const response = await axiosInstance.get("/stocks");
   // Flatten objects once here
@@ -35,6 +35,15 @@ export const addStock = createAsyncThunk(
     headers: Record<string, string>;
   }) => {
     const response = await axiosInstance.post("/stocks", payload, { headers });
+    return response.data;
+  }
+);
+
+export const downloadSampleExcel = createAsyncThunk(
+  "stocks/downloadSample",
+  async () => {
+    const response = await axiosInstance.get("/stocks");
+    // Flatten objects once here
     return response.data;
   }
 );
@@ -68,6 +77,23 @@ const stockSlice = createSlice({
         state.data.push(action.payload);
       })
       .addCase(addStock.rejected, (state, action) => {
+        state.addStatus = "failed";
+        state.error = action.error.message || "Failed to add stock";
+      })
+
+      // ADD STOCK
+      .addCase(downloadSampleExcel.pending, (state) => {
+        state.addStatus = "loading";
+        state.error = null;
+      })
+      .addCase(
+        downloadSampleExcel.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.addStatus = "succeeded";
+          // state.data.push(action.payload);
+        }
+      )
+      .addCase(downloadSampleExcel.rejected, (state, action) => {
         state.addStatus = "failed";
         state.error = action.error.message || "Failed to add stock";
       });
