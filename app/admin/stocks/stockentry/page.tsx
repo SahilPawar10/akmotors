@@ -16,11 +16,6 @@ import {
 } from "@/slices/stockEntrySlice";
 import { Upload, Download, Plus } from "lucide-react";
 
-// const users = [
-//   { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-//   { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
-// ];
-
 export default function StockEntry() {
   const dispatch = useDispatch<AppDispatch>();
   const { stocks } = useStocks();
@@ -34,10 +29,13 @@ export default function StockEntry() {
 
   // Fetch on mount (always fetch for hard refresh)
   useEffect(() => {
-    if (fetchEntryStatus === "idle") {
+    if (
+      fetchEntryStatus === "idle" &&
+      (!stockEntries || stockEntries.length === 0)
+    ) {
       dispatch(fetchStocksEntries());
     }
-  }, [dispatch, fetchEntryStatus]);
+  }, [dispatch, fetchEntryStatus, stockEntries]);
 
   const columns = useMemo(() => {
     if (!stockEntries || stockEntries.length === 0) return [];
@@ -147,7 +145,7 @@ export default function StockEntry() {
       <Table
         data={stockEntries}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         loading={false}
         onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
         onDelete={(id) => console.log("Deleted ID:", id)}

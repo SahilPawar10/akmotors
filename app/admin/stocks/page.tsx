@@ -121,7 +121,7 @@ export default function Stocks() {
       <Table
         data={stocks}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         loading={false}
         onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
         onDelete={(id) => console.log("Deleted ID:", id)}

@@ -56,6 +56,7 @@ export default function Sidebar() {
           items={[
             { label: "Stocks", href: "/admin/stocks" },
             { label: "Stock Entries", href: "/admin/stocks/stockentry" },
+            { label: "Stock Book", href: "/admin/stocks/stockbook" },
           ]}
           pathname={pathname!}
         />

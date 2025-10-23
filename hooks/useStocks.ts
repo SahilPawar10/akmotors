@@ -10,10 +10,10 @@ export const useStocks = () => {
 
   // Fetch on mount (always fetch for hard refresh)
   useEffect(() => {
-    if (fetchStatus === "idle") {
+    if (fetchStatus === "idle" && (!stocks || stocks.length === 0)) {
       dispatch(fetchStocks());
     }
-  }, [dispatch, fetchStatus]);
+  }, [dispatch, fetchStatus, stocks]);
 
   // Helper to refetch manually (after adding/updating/deleting)
   const refetchStocks = () => {

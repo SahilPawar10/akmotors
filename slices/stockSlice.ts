@@ -5,15 +5,19 @@ import { flattenObject } from "@/utils/commen";
 
 interface StocksState {
   data: any[];
+  bookData: any[];
   fetchStatus: "idle" | "loading" | "succeeded" | "failed";
+  fetchBookStatus: "idle" | "loading" | "succeeded" | "failed";
   addStatus: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: StocksState = {
   data: [],
+  bookData: [],
   fetchStatus: "idle",
   addStatus: "idle",
+  fetchBookStatus: "idle",
   error: null,
 };
 
@@ -23,6 +27,15 @@ export const fetchStocks = createAsyncThunk("stocks/fetchStocks", async () => {
   // Flatten objects once here
   return response.data;
 });
+
+// ✅ Fetch stock book (could be a different endpoint)
+export const fetchStockBook = createAsyncThunk(
+  "stocks/fetchStockBook",
+  async () => {
+    const response = await axiosInstance.get("/stock-entry/stock-book"); // <-- make sure endpoint differs
+    return response.data;
+  }
+);
 
 // Add stock
 export const addStock = createAsyncThunk(
@@ -65,6 +78,23 @@ const stockSlice = createSlice({
       .addCase(fetchStocks.rejected, (state, action) => {
         state.fetchStatus = "failed";
         state.error = action.error.message || "Failed to fetch stocks";
+      })
+
+      // === FETCH STOCK BOOK ===
+      .addCase(fetchStockBook.pending, (state) => {
+        state.fetchBookStatus = "loading";
+        state.error = null;
+      })
+      .addCase(
+        fetchStockBook.fulfilled,
+        (state, action: PayloadAction<any[]>) => {
+          state.fetchBookStatus = "succeeded";
+          state.bookData = action.payload;
+        }
+      )
+      .addCase(fetchStockBook.rejected, (state, action) => {
+        state.fetchBookStatus = "failed";
+        state.error = action.error.message || "Failed to fetch stock book";
       })
 
       // ADD STOCK
