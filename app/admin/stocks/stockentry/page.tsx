@@ -50,7 +50,6 @@ export default function StockEntry() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleEdit = (row: any) => console.log("Edited:", row);
   const handleImport = () => console.log("Import clicked");
   const handleExport = () => console.log("Export clicked");
 

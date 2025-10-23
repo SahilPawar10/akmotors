@@ -48,8 +48,6 @@ export default function Stocks() {
       type: "text",
       required: true,
     },
-    { name: "partDesc", label: "partDesc", type: "text", required: true },
-
     // {
     //   name: "role",
     //   label: "Role",
