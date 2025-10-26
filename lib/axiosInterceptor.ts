@@ -88,11 +88,11 @@ axiosInstance.interceptors.response.use(
       originalRequest!._retry = true;
       try {
         // Call refresh endpoint
-        await axiosInstance.post("/auth/refresh");
+        await axiosInstance.post("/auth/refresh-tokens");
         // Retry original request
         return axiosInstance(originalRequest!);
       } catch (refreshError) {
-        window.location.href = "/login"; // redirect if refresh fails
+        window.location.href = "/sign-in"; // redirect if refresh fails
         return Promise.reject(refreshError);
       }
     }

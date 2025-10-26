@@ -38,14 +38,9 @@ export const registerUser = createAsyncThunk(
 
 export const LoginUser = createAsyncThunk(
   "auth/loginUser",
-  async (
-    { payload, headers }: { payload: any; headers: any },
-    { rejectWithValue }
-  ) => {
+  async ({ payload }: { payload: any; headers: any }, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/auth/login", payload, {
-        headers,
-      });
+      const response = await axiosInstance.post("/auth/login", payload);
       return response.data;
     } catch (err: any) {
       // Capture backend error message
