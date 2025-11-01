@@ -24,6 +24,11 @@ export const registerUser = createAsyncThunk(
       const response = await axiosInstance.post("/auth/register", payload, {
         headers,
       });
+      localStorage.setItem("access_token", response.data.tokens.access.token);
+      localStorage.setItem("refresh_token", response.data.tokens.refresh.token);
+      localStorage.setItem("swarajya-user", JSON.stringify(response.data.user));
+      localStorage.setItem("userRole", JSON.stringify(response.data.user.role));
+      localStorage.setItem("userId", JSON.stringify(response.data.user.id));
       return response.data;
     } catch (err: any) {
       // Capture backend error message
@@ -41,6 +46,13 @@ export const LoginUser = createAsyncThunk(
   async ({ payload }: { payload: any; headers: any }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post("/auth/login", payload);
+      console.log(response.data, "response");
+
+      localStorage.setItem("access_token", response.data.tokens.access.token);
+      localStorage.setItem("refresh_token", response.data.tokens.refresh.token);
+      localStorage.setItem("swarajya-user", JSON.stringify(response.data.user));
+      localStorage.setItem("userRole", JSON.stringify(response.data.user.role));
+      localStorage.setItem("userId", JSON.stringify(response.data.user.id));
       return response.data;
     } catch (err: any) {
       // Capture backend error message

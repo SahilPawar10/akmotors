@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import Sidebar from "@/components/admin/SideBar";
 import Topbar from "@/components/admin/Topbar";
 
@@ -9,6 +11,16 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // ✅ Check for access token in localStorage
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      // Redirect unauthenticated users
+      router.replace("/sign-in");
+    }
+  }, [router]);
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">

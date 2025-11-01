@@ -39,7 +39,7 @@ export default function RegisterPage() {
       firstName,
       lastName,
       email,
-      number: mobile,
+      number: Number(mobile),
       password,
     };
 
