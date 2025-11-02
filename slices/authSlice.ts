@@ -26,7 +26,7 @@ export const registerUser = createAsyncThunk(
       });
       localStorage.setItem("access_token", response.data.tokens.access.token);
       localStorage.setItem("refresh_token", response.data.tokens.refresh.token);
-      localStorage.setItem("swarajya-user", JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("userRole", JSON.stringify(response.data.user.role));
       localStorage.setItem("userId", JSON.stringify(response.data.user.id));
       return response.data;
