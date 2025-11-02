@@ -17,26 +17,14 @@ import {
   fetchLocation,
   selectLocation,
 } from "@/slices/locationSlice";
+import { useLocation } from "@/hooks/useLocation";
 
 export default function Location() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const {
-    fetchLocationStatus,
-    addLocationStatus,
-    error,
-    data: location,
-  } = useSelector(selectLocation);
+  const { location, fetchLocationStatus } = useLocation();
 
-  // Fetch on mount (always fetch for hard refresh)
-  useEffect(() => {
-    if (
-      fetchLocationStatus === "idle" &&
-      (!location || location.length === 0)
-    ) {
-      dispatch(fetchLocation());
-    }
-  }, [dispatch, fetchLocationStatus, location]);
+  const { addLocationStatus, error } = useSelector(selectLocation);
 
   const columns = useMemo(() => {
     if (!location || location.length === 0) return [];

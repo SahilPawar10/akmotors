@@ -4,21 +4,21 @@ import axiosInstance from "@/lib/axiosInterceptor";
 
 interface VehicleEntryState {
   data: any[];
-  fetchEntryStatus: "idle" | "loading" | "succeeded" | "failed";
+  fetchStatus: "idle" | "loading" | "succeeded" | "failed";
   addVehicleStatus: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: VehicleEntryState = {
   data: [],
-  fetchEntryStatus: "idle",
+  fetchStatus: "idle",
   addVehicleStatus: "idle",
   error: null,
 };
 
 // Fetch users
-export const fetchVehicleEntries = createAsyncThunk(
-  "vehicle/fetchVehicleEntries",
+export const fetchVehicals = createAsyncThunk(
+  "vehicle/fetchVehicals",
   async () => {
     const response = await axiosInstance.get("/vehicle");
     // Flatten objects once here
@@ -28,7 +28,7 @@ export const fetchVehicleEntries = createAsyncThunk(
 
 // Add stock
 export const addVehicleEntry = createAsyncThunk(
-  "Vehicle/addStockEntry",
+  "vehicle/addVehicleEntry",
   async ({
     payload,
     headers,
@@ -44,24 +44,24 @@ export const addVehicleEntry = createAsyncThunk(
 );
 
 const vehicleEntrySlice = createSlice({
-  name: "vehicles",
+  name: "vehicals",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchVehicleEntries.pending, (state) => {
-        state.fetchEntryStatus = "loading";
+      .addCase(fetchVehicals.pending, (state) => {
+        state.fetchStatus = "loading";
         state.error = null;
       })
       .addCase(
-        fetchVehicleEntries.fulfilled,
+        fetchVehicals.fulfilled,
         (state, action: PayloadAction<any[]>) => {
-          state.fetchEntryStatus = "succeeded";
+          state.fetchStatus = "succeeded";
           state.data = action.payload;
         }
       )
-      .addCase(fetchVehicleEntries.rejected, (state, action) => {
-        state.fetchEntryStatus = "failed";
+      .addCase(fetchVehicals.rejected, (state, action) => {
+        state.fetchStatus = "failed";
         state.error = action.error.message || "Failed to fetch Vehicle";
       })
 
@@ -83,7 +83,7 @@ const vehicleEntrySlice = createSlice({
       });
   },
 });
-export const selectVehicles = (state: { vehicles: VehicleEntryState }) =>
-  state.vehicles;
+export const selectVehicles = (state: { vehicals: VehicleEntryState }) =>
+  state.vehicals;
 
 export default vehicleEntrySlice.reducer;

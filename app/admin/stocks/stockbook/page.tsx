@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/providers/store";
 import { Upload, Download, Plus } from "lucide-react";
 import { fetchStockBook, selectStocks } from "@/slices/stockSlice";
+import Loader from "@/components/ui/Loader";
 
 // const users = [
 //   { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
@@ -61,14 +62,18 @@ export default function StockEntryBook() {
         </div>
       </div>
 
-      <Table
-        data={bookData}
-        columns={columns}
-        pageSize={10}
-        loading={false}
-        // onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
-        // onDelete={(id) => console.log("Deleted ID:", id)}
-      />
+      {fetchBookStatus === "loading" ? (
+        <Loader size={24} />
+      ) : (
+        <Table
+          data={bookData}
+          columns={columns}
+          pageSize={10}
+          loading={false}
+          // onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
+          // onDelete={(id) => console.log("Deleted ID:", id)}
+        />
+      )}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import stockReducer from "../slices/stockSlice";
 import stockEntryReducer from "../slices/stockEntrySlice";
 import locationReducer from "../slices/locationSlice";
 import authReducer from "../slices/locationSlice";
+import serviceReducer from "../slices/serviceSlice";
+import vehicalReducer from "../slices/vehicleSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     stockEntry: stockEntryReducer,
     location: locationReducer,
     authuser: authReducer,
+    services: serviceReducer,
+    vehicals: vehicalReducer,
   },
 });
 

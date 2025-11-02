@@ -15,6 +15,7 @@ import {
   addStockEntry,
 } from "@/slices/stockEntrySlice";
 import { Upload, Download, Plus } from "lucide-react";
+import Loader from "@/components/ui/Loader";
 
 export default function StockEntry() {
   const dispatch = useDispatch<AppDispatch>();
@@ -141,14 +142,18 @@ export default function StockEntry() {
         </div>
       </div>
 
-      <Table
-        data={stockEntries}
-        columns={columns}
-        pageSize={10}
-        loading={false}
-        onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
-        onDelete={(id) => console.log("Deleted ID:", id)}
-      />
+      {fetchEntryStatus === "loading" ? (
+        <Loader size={24} />
+      ) : (
+        <Table
+          data={stockEntries}
+          columns={columns}
+          pageSize={10}
+          loading={false}
+          onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
+          onDelete={(id) => console.log("Deleted ID:", id)}
+        />
+      )}
 
       {/* Modal with Form */}
       <Modal

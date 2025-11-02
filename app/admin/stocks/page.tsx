@@ -14,6 +14,7 @@ import { Upload, Download, Plus } from "lucide-react";
 import DownloadExcelButton from "@/components/ui/DownloadExcelButton";
 import { IMPORT_STOCK_EXCEL, IMPORT_STOCK_SAMPLE_FILE } from "@/lib/constant";
 import ImportButton from "@/components/ui/ImportButton";
+import Loader from "@/components/ui/Loader";
 
 export default function Stocks() {
   const dispatch = useDispatch<AppDispatch>();
@@ -116,14 +117,18 @@ export default function Stocks() {
         </div>
       </div>
 
-      <Table
-        data={stocks}
-        columns={columns}
-        pageSize={10}
-        loading={false}
-        onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
-        onDelete={(id) => console.log("Deleted ID:", id)}
-      />
+      {fetchStatus === "loading" ? (
+        <Loader size={24} />
+      ) : (
+        <Table
+          data={stocks}
+          columns={columns}
+          pageSize={10}
+          loading={false}
+          onEdit={(updatedRow) => console.log("Edited:", updatedRow)}
+          onDelete={(id) => console.log("Deleted ID:", id)}
+        />
+      )}
 
       {/* Modal with Form */}
       <Modal
