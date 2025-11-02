@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="#" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="sign-in" onClick={() => setMobileMenuOpen(false)}>
                 Sign-In
               </Link>
             </li>
